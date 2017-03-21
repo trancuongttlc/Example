@@ -16,6 +16,13 @@ app.use(function (req, res, next) {
     req.data = {};
     next();
 });
+
+app.use(express.static('client'));
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + 'client/index.html'));
+});
+
+
 app.use('/api', router);
 
 app.listen(3004, function(err, connect) {

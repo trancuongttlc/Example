@@ -22,7 +22,8 @@ const config = {
             {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
-            }
+            },
+            { test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['url', 'img'] }
         ]
     },
     plugins: [
@@ -40,6 +41,5 @@ const config = {
         new webpack.optimize.DedupePlugin(),
     ]
 };
-
 module.exports = config;
 

@@ -7,7 +7,7 @@ class Users {
 	}
 
 	getUsers () {
-		return this.connection.select('*').from('users').limit(100);
+		return this.connection.select('*').from('users').limit(10);
 	}
 
 	getById (id) {
@@ -21,6 +21,11 @@ class Users {
 
 	register (data) {
 		return this.connection.table('users').insert(data);
+	}
+
+	login (email, password) {
+		return this.connection.select('*').from('users')
+		.where({email: email, password: password});
 	}
 
 	deleteUser (id) {

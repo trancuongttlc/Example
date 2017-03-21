@@ -1,10 +1,12 @@
 import React from 'react';
-
+import './error.css';
 class ErrorComponent extends React.Component {
 
 	render() {
 		return (
-				<h1>ErrorComponent CPN</h1>
+			<div className="bg-error-page">
+				<h1 className="text-center">Hello</h1>
+			</div>
 		);
 	}
 

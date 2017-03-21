@@ -15,6 +15,7 @@ let EmailValid   = require('./middleware/email.valid');
 router
 	.get('/users', UsersHandler.getUsers)
 	.get('/users/:id', UsersHandler.getById)
+	.post('/users/login', UsersHandler.login)
 	.post('/users', RequestValid, EmailValid, UsersHandler.register)
 	.delete('/users/:id', UsersHandler.deleteUser)
 	.use(function(err, req, res, next) {
