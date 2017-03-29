@@ -1,9 +1,9 @@
 import {createStore, applyMiddleware} from 'redux'; 
 
 var defaultState = {
-  todo: {
-    items: []
-  }
+  	todo: {
+    	items: []
+  	}
 };
 
 function todoApp(state, action) {
