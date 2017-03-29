@@ -5,7 +5,7 @@ class ErrorComponent extends React.Component {
 	render() {
 		return (
 			<div className="bg-error-page">
-				<h1 className="text-center">Hello</h1>
+				<a className="come-back" href="/#/home">Come back home</a>
 			</div>
 		);
 	}

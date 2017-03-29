@@ -8,6 +8,10 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import Home from 'material-ui/svg-icons/action/home';
+import Contact from 'material-ui/svg-icons/communication/import-contacts';	
+import Users from 'material-ui/svg-icons/social/group';	
+import Log from 'material-ui/svg-icons/navigation/subdirectory-arrow-right';	
+
 
 
 import './layout.css';
@@ -52,19 +56,16 @@ class Header extends React.Component {
 						iconElementRight={<IconButton><NavigationClose /></IconButton>}
 					/>
 		          	<MenuItem href="#/home" leftIcon={<Home/>}>Home</MenuItem>
-		          	<MenuItem>About</MenuItem>
-		          	<MenuItem>News</MenuItem>
-		          	<MenuItem>Sale</MenuItem>
-		          	<MenuItem>Contact</MenuItem>
-				    <MenuItem>Users</MenuItem>
+		          	<MenuItem leftIcon={<Contact />}>Contact</MenuItem>
+				    <MenuItem leftIcon={<Users />}>Users</MenuItem>
+				    <MenuItem href="#/auth" leftIcon={<Log />}><b>Logout</b></MenuItem>
 		        </Drawer>
-
 				<div className="col-md-10 col-md-offset-1">
 					{this.props.children}
 				</div>
 				<div className="clearfix"></div>
 				<div className="col-md-10 col-md-offset-1">
-					<h5 className="text-center">Copy@right React+Nodejs</h5>
+					<h5 className="text-center">Copy@right</h5>
 				</div>
 			</div>
 		);

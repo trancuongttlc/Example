@@ -1,5 +1,9 @@
 'use strict';
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+const uploadPath = './client/app/images';
+
 class UsersHandler {
 
 	getUsers (req, res, next) {
@@ -26,22 +30,42 @@ class UsersHandler {
 	}
 
 	login (req, res, next) {
-		let email    = req.body.email;
-		let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+		let data   = req.data;	
+		let object = {};
+		for (let i = 0; i < data.length; ++i)
+		    if (data[i] !== undefined) object = data[i];
+		if (!req.body.password) {
+	   		return res.json({status: false, data: [], message: 'Password is wrong !'})
+		}
+		if (bcrypt.compareSync(req.body.password, object.password)) {
+			let token = jwt.sign(object, 'cuong', {
+				expiresIn: '1 days'
+			});
+			return res.status(200).json({status: true, data: {data: object, token: token}, message: 'LOGIN SUCCESS'});
+		}
+		return res.status(200).json({status: false, data: [], message: 'LOGIN FAILED'});
+	}
+
+	editProfile (req, res, next) {
+		let id       = req.params.id;
+		let data     = req.data;
 		let pool     = req.app.get('usersRepository');
-		pool.login(email, password)
-		.then(result => {
-			if(result == '') {
-				return res.json({status: false, data: result, message: "LOGIN FAILED"});
-			}
-			return result;
-		}).then(info => {
-			res.status(201).json({status: true, data: info, message: "SUCCESS"});
+		pool.editProfile(id, data).then(result => {
+			res.status(201).json({status: true, data: result, message: "SUCCESS"});
+		}).catch(error => next(error));
+	}
+
+	uploadAvatar (req, res, next) {
+		let id     = req.params.id;
+		let avatar = req.file.path;
+		let pool   = req.app.get('usersRepository');
+		pool.uploadAvatar(id, avatar).then(result => {
+			res.json({status: true, data: result, message: "SUCCESS"});
 		}).catch(error => next(error));
 	}
 
 	deleteUser (req, res, user) {
-		let id = req.params.id;
+		let id   = req.params.id;
 		let pool = req.app.get('usersRepository');
 		pool.deleteUser(id).then(result => {
 			res.status(201).json({status: true, data: result, message: "SUCCESS"});
@@ -49,4 +73,6 @@ class UsersHandler {
  	}	
 
 }
+
+
 module.exports = new UsersHandler;

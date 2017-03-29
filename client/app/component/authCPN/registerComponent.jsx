@@ -21,8 +21,6 @@ class RegisterComponent extends React.Component {
 			address  : '',
 			phone    : '',
 			sex      : '',
-
-
     	}
     	this.handleChangeRequest = this.handleChangeRequest.bind(this);
     	this.register            = this.register.bind(this);

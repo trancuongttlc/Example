@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Router, Route, hashHistory, Link, IndexRoute} from 'react-router';
+import { Provider } from 'react-redux';
+import {Router, Route, hashHistory, Link, IndexRoute, browserHistory} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {teal400, grey800, red800} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -17,12 +18,12 @@ class App extends React.Component {
         	<Router history={hashHistory}>
                 <Route path="/" component={LayoutComponent}>
                     <IndexRoute component={AuthComponent} />
-                    <Route path="login" component={AuthComponent}/>
+                    <Route path="auth" component={AuthComponent}/>
                     <Route path="home" component={HomeComponent}/>
-                    <Route path="*" component={ErrorComponent}/>
                 </Route>
+                <Route path="*" component={ErrorComponent}/>
             </Router>
-        );
+        );  
     }
 
 }
@@ -36,4 +37,8 @@ const customTheme = getMuiTheme({
     }
 });
 
-render(<MuiThemeProvider muiTheme={customTheme}><App/></MuiThemeProvider>, document.getElementById('container'));
+render(
+    <Provider><MuiThemeProvider muiTheme={customTheme}><App/></MuiThemeProvider></Provider>, 
+    document.getElementById('container')
+);
+// https://www.youtube.com/watch?v=53SNhzt7AqA

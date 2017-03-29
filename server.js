@@ -29,3 +29,6 @@ app.listen(3004, function(err, connect) {
     if(err) throw err;
     console.log('App listening to http://localhost:3004 ...');
 });
+
+// https://github.com/rajaraodv/react-redux-blog
+// https://www.davidmeents.com/blog/manage-state-connect-to-api-redux-axios/

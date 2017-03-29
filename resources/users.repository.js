@@ -23,9 +23,17 @@ class Users {
 		return this.connection.table('users').insert(data);
 	}
 
-	login (email, password) {
+	login (email) {
 		return this.connection.select('*').from('users')
-		.where({email: email, password: password});
+			.where({ email: email});
+	}
+
+	uploadAvatar (id, avatar) {
+		return this.connection.table('users').update({avatar: avatar}).where({id: id});
+	}
+
+	editProfile (id, data) {
+		return this.connection.table('users').update(data).where({id: id});
 	}
 
 	deleteUser (id) {

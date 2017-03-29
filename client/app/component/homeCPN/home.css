@@ -4,3 +4,6 @@
 	margin: auto;
 	text-align: center;
 }
+.form-style label {
+	font-size:13px;
+}
