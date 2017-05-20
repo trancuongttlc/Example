@@ -11,7 +11,10 @@ class Users {
 	}
 
 	getById (id) {
-		return this.connection.select('*').from('users').where({id: id});
+		return Promise.all([
+			this.connection.select('*').from('users').where({id: id}),
+			this.connection.select('path').from('images').where({users_id: id})
+		])
 	}
 
 	countEmail(email) {

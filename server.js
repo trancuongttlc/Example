@@ -11,6 +11,7 @@ let router = require('./http/index');
 boot(app);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+// app.use(express.limit('4M'));
 
 app.use(function (req, res, next) {
     req.data = {};

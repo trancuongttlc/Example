@@ -1,6 +1,6 @@
 'use strict';
 
-let knex = require('knex')
+const knex = require('knex')
 ({
   client: 'mysql',
   connection: {

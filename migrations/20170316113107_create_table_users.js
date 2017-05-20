@@ -10,6 +10,8 @@ exports.up = function(knex) {
         table.boolean('sex').defaultTo(1);
         table.integer('level').defaultTo(1);
         table.boolean('active').defaultTo(false);
+        table.string('images');
+        table.string('news');
         table.timestamps();
     });
     

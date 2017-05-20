@@ -2,7 +2,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const uploadPath = './client/app/images';
 
 class UsersHandler {
 
@@ -17,7 +16,9 @@ class UsersHandler {
 		let id = req.params.id;
 		let pool = req.app.get('usersRepository');
 		pool.getById(id).then(result => {
-			res.status(201).json({status: true, data: result, message: "SUCCESS"});
+			let userInfo = result[0][0];
+			userInfo.images = result[1];
+			res.status(201).json({status: true, data: userInfo, message: "SUCCESS"});
 		}).catch(error => {next(error) });
 	}
 
@@ -57,9 +58,9 @@ class UsersHandler {
 
 	uploadAvatar (req, res, next) {
 		let id     = req.params.id;
-		let avatar = req.file.path;
+		let avatar = req.data;
 		let pool   = req.app.get('usersRepository');
-		pool.uploadAvatar(id, avatar).then(result => {
+		pool.uploadAvatar(id, avatar.path).then(result => {
 			res.json({status: true, data: result, message: "SUCCESS"});
 		}).catch(error => next(error));
 	}
@@ -70,7 +71,7 @@ class UsersHandler {
 		pool.deleteUser(id).then(result => {
 			res.status(201).json({status: true, data: result, message: "SUCCESS"});
 		}).catch(error => {next(error) });
- 	}	
+ 	}
 
 }
 
